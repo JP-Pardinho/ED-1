@@ -4,7 +4,7 @@
 int main() {
     int *vet = NULL;
     int tam_vet;
-    int i;
+    int i, aux;
 
     printf("Digite o tamanho do vetor: ");
     scanf("%d", &tam_vet);
@@ -16,6 +16,14 @@ int main() {
         scanf("%d", &vet[i]);
     }
 
+    for(i=0; i<tam_vet; i++){
+        if 
+        }
+    }
+
+    for(i=0; i<tam_vet; i++){
+        printf("%d\n", vet[i]);
+    }
     
     
     free(vet);
