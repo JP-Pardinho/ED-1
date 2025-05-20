@@ -126,39 +126,85 @@ void imprimeLista(No *lista){
     No *aux = lista;
     while (aux != NULL){
         printf("%d ", aux->base);
-        printf("\n");
-        printf("%d ", aux->expoente);
+        printf("%d \n", aux->expoente);
         aux = aux->prox;
     }
     printf("\n");
 }
 
 int main(){
-
-    int n, m;
+    int base, expo, op;
     int i = 0;
     No *lista1 = NULL;
     No *lista2 = NULL;
+    No *resultado = NULL;
 
-    for (i = 0; i < 5; i++){
-        printf("Digite a base: ");
-        scanf("%d ", &n);
-        printf("Digite a expoente: ");
-        scanf("%d ", &m);
-        insereDecrescente(lista1, n, m);
-    }
     
-    for (i = 0; i < 5; i++){
-        printf("Digite a base: ");
-        scanf("%d ", &n);
-        printf("Digite a expoente: ");
-        scanf("%d ", &m);
-        insereDecrescente(lista2, n, m);
-    }
-    
-    No *soma = somaPolinomios(lista1, lista2);
+    do
+    {
+        printf("Escolha o que gostaria de fazer: \n");
+        printf("1 - Somar\n");
+        printf("2 - Subtrair\n");
+        printf("3 - Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &op);
+        
+        switch (op){
+            case 1:
+                printf("Somando: \n");
+                printf("Lista 1: \n");
+                for (i = 0; i < 5; i++){
+                    printf("Digite a base: ");
+                    scanf("%d", &base);
+                    printf("Digite a expoente: ");
+                    scanf("%d", &expo);
+                    lista1 = insereDecrescente(lista1, base, expo);
+                }
+                printf("\n");    
+                printf("Lista 2: \n");
+                for (i = 0; i < 5; i++){
+                    printf("Digite a base: ");
+                    scanf("%d", &base);
+                    printf("Digite a expoente: ");
+                    scanf("%d", &expo);
+                    lista2 = insereDecrescente(lista2, base, expo);
+                }
 
-    imprimeLista(soma);
+                resultado = somaPolinomios(lista1, lista2);
+                imprimeLista(resultado);
+            break;
+        
+        case 2:
+            printf("Subtraindo: \n");
+            for (i=0; i<5; i++){
+                printf("Digite a base: ");
+                scanf("%d", &base);
+                printf("Digite o expoente: ");
+                scanf("%d", &expo);
+                lista1 = insereDecrescente(lista1, base, expo);
+            }
+            printf("\n");
+            for(i=0; i<5; i++){
+                printf("Digite a base: ");
+                scanf("%d", &base);
+                printf("Digite o expoente: ");
+                scanf("%d", &expo);
+                lista1 = insereDecrescente(lista1, base, expo);
+            }
+            
+            resultado = subtraiPolinomios(lista1, lista2);
+            imprimeLista(resultado);
+            break;
+
+        case 3:
+            printf("Saindo...\n");
+            break;
+
+        default:
+            break;
+        }
+        
+    } while (op != 3);
 
     return 0;
 }
