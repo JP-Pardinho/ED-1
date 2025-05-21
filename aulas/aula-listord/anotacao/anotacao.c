@@ -94,7 +94,7 @@ int main(){
     printf("Digite o numeo que voce quer inserir? ");
     scanf("%d", &buscar);
 
-    teste = insereOrd(L, t);
+    teste = insereOrd(L, teste);
     printf("Teste = %d\n", teste);
 
     while (L != NULL){
