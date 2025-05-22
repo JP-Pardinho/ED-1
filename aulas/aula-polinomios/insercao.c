@@ -108,22 +108,10 @@ No *subtraiPolinomios(No *lista1, No *lista2){
     return resultado;
 }
 
-No *multiplicarPolinomios(No *lista1, No *lista2){
-    No *aux1 = lista1;
-    No *aux2 = lista2;
-    No *resultado = NULL;
-
-    while (aux){
-        /* code */
-    }
-    
-
-}
-
 void imprimeLista(No *lista){
     No *aux = lista;
     while (aux != NULL){
-        printf("%dX^%d ", aux->base, aux->expoente);
+        printf("%dx^%d ", aux->base, aux->expoente);
         if (aux->prox != NULL){
             printf("+ ");
         }
@@ -131,6 +119,38 @@ void imprimeLista(No *lista){
     }
     printf("\n\n");
 }
+
+
+No *multiplicarPolinomios(No *lista1, No *lista2){
+    No *aux1 = lista1;
+    No *aux2 = lista2;
+    No *resultado = NULL;
+    int mult = 0, soma = 0;
+
+    if(aux1 == NULL){
+        return 0;
+    }
+     else if (aux2 == NULL){
+        return 0;
+    } else {
+        while (aux1 != NULL){
+            aux2 = lista2;
+            while (aux2 != NULL){
+                if(aux1->base == 0 || aux2->base == 0){
+                    resultado = insereDecrescente(resultado, 0, 0);
+                } else{
+                    mult = aux1->base * aux2->base;
+                    soma = aux1->expoente + aux2->expoente;
+                    resultado = insereDecrescente(resultado, mult, soma);;
+                    aux2 = aux2->prox;
+                }
+            }
+            aux1 = aux1->prox;
+        }
+    }
+    return resultado;
+}
+
 
 void liberaLista(No *lista) {
     No *aux;
@@ -160,7 +180,7 @@ int main(){
         
         switch (op){
             case 1:
-                printf("Somando: \n");
+                printf("\nSomando: \n");
                 printf("A lista 1 tem quantos elementos: ");
                 scanf("%d", &qnt);
                 for (i = 0; i < qnt; i++){
@@ -191,7 +211,7 @@ int main(){
             break;
         
             case 2:
-                printf("Subtraindo: \n");
+                printf("\nSubtraindo: \n");
                 printf("A lista 1 tem quantos elementos: ");
                 scanf("%d", &qnt);
                 for (i=0; i<qnt; i++){
@@ -221,41 +241,34 @@ int main(){
             break;
 
             case 3:
-                printf("Multiplicando: \n");
+                printf("\nMultiplicando: \n");
                 printf("A lista 1 tem quantos elementos: ");
                 scanf("%d", &qnt);
-                if(qnt >=1){
-                    for(i=0; i<qnt; i++){
-                        printf("Digite a base: ");
-                        scanf("%d", &base);
-                        printf("Digite o expoente: ");
-                        scanf("%d", &expo);
-                        lista1 = insereDecrescente(lista1, base, expo);
-                    }
-                    printf("A lista 2 tem quantos elementos: ");
-                    scanf("%d", &qnt);
-                    if (qnt >= 1){
-                        for (i=0; i<qnt; i++){
-                            printf("Digite a base: ");
-                            scanf("%d", &base);
-                            printf("Digite o expoente: ");
-                            scanf("%d", &expo);
-                            lista2 = insereDecrescente(lista2, base, expo);
-
-                            resultado = multiplicarPolinomios(lista1, lista2);
-                            imprimeLista(resultado);
-
-                            liberaLista(lista1);
-                            liberaLista(lista2);
-                            liberaLista(resultado);
-                            lista1 = lista2 = resultado = NULL;
-                        }
-                    } else {
-                        printf("Valor invalido!\n");
-                    }
-                } else{
-                    printf("Valor invalido\n");
+                
+                for(i=0; i<qnt; i++){
+                    printf("Digite a base: ");
+                    scanf("%d", &base);
+                    printf("Digite o expoente: ");
+                    scanf("%d", &expo);
+                    lista1 = insereDecrescente(lista1, base, expo);
                 }
+                printf("A lista 2 tem quantos elementos: ");
+                scanf("%d", &qnt);
+            
+                for (i=0; i<qnt; i++){
+                    printf("Digite a base: ");
+                    scanf("%d", &base);
+                    printf("Digite o expoente: ");
+                    scanf("%d", &expo);
+                    lista2 = insereDecrescente(lista2, base, expo);
+                }
+                resultado = multiplicarPolinomios(lista1, lista2);
+                imprimeLista(resultado);
+
+                liberaLista(lista1);
+                liberaLista(lista2);
+                liberaLista(resultado);
+                lista1 = lista2 = resultado = NULL;
             break;
 
             case 4: break;

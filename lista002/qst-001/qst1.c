@@ -49,7 +49,7 @@ void imprimeLista(No *L){
     printf("\n");
 }
 
-int buscaChave(No *L, int valor){
+int contaAntecedente(No *L, int valor){
     int cont = 0;
     No *aux = L;
     if(L == NULL){
@@ -94,7 +94,7 @@ int main(){
     printf("Digite o numeo que voce quer buscar: ");
     scanf("%d", &buscar);
 
-    teste = buscaChave(L, buscar);
+    teste = contaAntecedente(L, buscar);
     printf("Teste = %d\n", teste);
 
     while (L != NULL){
