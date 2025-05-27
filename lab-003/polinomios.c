@@ -27,7 +27,7 @@ No *insereDecrescente(No *lista, int valorBase, int valorExp){
         lista = novo;
         return lista;
     } else{
-        while (aux != NULL && valorExp < aux->expoente){
+        while (aux != NULL && valorExp < aux->expoente && valorBase != 0){
             pred = aux;
             aux = aux->prox;
         }
@@ -136,16 +136,14 @@ No *multiplicarPolinomios(No *lista1, No *lista2){
         while (aux1 != NULL){
             aux2 = lista2;
             while (aux2 != NULL){
-                if(aux1->base == 0 || aux2->base == 0){
-                    resultado = insereDecrescente(resultado, 0, 0);
-                } else{
+                if(aux1->base != 0 && aux2->base != 0){
                     mult = aux1->base * aux2->base;
                     soma = aux1->expoente + aux2->expoente;
                     resultado = insereDecrescente(resultado, mult, soma);;
                     aux2 = aux2->prox;
                 }
-            }
             aux1 = aux1->prox;
+            }
         }
     }
     return resultado;
