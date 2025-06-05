@@ -39,55 +39,51 @@ No *incereOrde(No *lista, int valor){
 }
 
 No *fusao(No *lista1, No *lista2) {
-    No *aux1 = lista1;
-    No *aux2 = lista2;
-    No *resultado = NULL;
+    No *nova_lista = NULL; 
     No *ultimo = NULL;
-    
-    if (aux1 == NULL) {
-        return aux2;
-    } else if (aux2 == NULL) {
-        return aux1;    
+
+    if(lista1 == NULL) return lista2;
+    if(lista1 == NULL) return lista1;
+
+    if(lista1->dado <= lista2->dado){
+        nova_lista = lista1;
+        lista1 = lista1->prox;
+    } else{
+        nova_lista = lista2;
+        lista2 = lista2->prox;
     }
     
-    // Inicializa a lista resultado
-    if (aux1->dado <= aux2->dado) {
-        resultado = aux1;
-        aux1 = aux1->prox;
-    } else {
-        resultado = aux2;
-        aux2 = aux2->prox;
-    }
-    ultimo = resultado;
-    
-    while (aux1 != NULL && aux2 != NULL) {
-        if (aux1->dado <= aux2->dado) {
-            ultimo->prox = aux1;
-            aux1 = aux1->prox;
+    ultimo = nova_lista;
+
+    while (lista1 != NULL && lista2 != NULL){
+        if(lista1->dado <= lista2->dado){
+            ultimo->prox = lista1;
+            lista1 = lista1->prox;
         } else {
-            ultimo->prox = aux2;
-            aux2 = aux2->prox;
+            ultimo->prox = lista2;
+            lista2 = lista2->prox;
         }
         ultimo = ultimo->prox;
     }
     
-    // Anexa os elementos restantes
-    if (aux1 != NULL) {
-        ultimo->prox = aux1;
+    if(lista1 != NULL){
+        ultimo->prox = lista1;
     } else {
-        ultimo->prox = aux2;
+        ultimo->prox = lista2;
     }
-    
-    return resultado;
+
+    return nova_lista;
 }
 
-void imprimeLista(No *lista){
+void imprimeLista(No *lista) {
     No *aux = lista;
-    if(aux == NULL) return;
-    printf(" - %d - ", lista->dado);
-    imprimeLista(lista->prox);
-    printf("\n\n");
+    while(aux != NULL) {
+        printf("%d ", aux->dado);
+        aux = aux->prox;
+    }
+    printf("\n");
 }
+
 
 
 void liberaLista(No *lista) {
@@ -125,8 +121,6 @@ int main() {
     resultado = fusao(lista1, lista2);
     imprimeLista(resultado);
 
-    // liberaLista(lista1);
-    // liberaLista(lista2);
     liberaLista(resultado);
 
     return 0;
