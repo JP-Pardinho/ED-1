@@ -16,7 +16,7 @@ No* criaNo(int valor){
     }
     novo->dado = valor;
     novo->ant = NULL;
-    novo->prox =NULL;
+    novo->prox = NULL;
     
     return novo;
 }
