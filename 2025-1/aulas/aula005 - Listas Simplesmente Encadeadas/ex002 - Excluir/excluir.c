@@ -35,7 +35,8 @@ No *insereIni(No *L, int valor){
 No *excluir (No *lista){
     No *fix = lista;
     
-    while(fix != NULL && fix->prox != NULL){
+    // while(fix != NULL && fix->prox != NULL){
+    while (fix != NULL){
         No *pred = fix;
         No *aux = fix->prox;
         while (aux != NULL){
@@ -77,7 +78,7 @@ int main() {
     int valor = 0;
     No *lista = NULL;
     
-    for (int i=0; i < 10; i++){
+    for (int i=0; i < 2; i++){
         scanf("%d", &valor);
         lista = insereIni(lista, valor);
     }
