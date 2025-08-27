@@ -8,7 +8,7 @@ F *criaFilaPrioridades(F *fila, int c){
     }
 
     fila->tamanho = c;
-    return fila;
+    return fila;    
 }
 
 int compara(void *k, void *l){
