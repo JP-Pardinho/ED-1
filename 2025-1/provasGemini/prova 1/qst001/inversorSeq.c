@@ -8,7 +8,7 @@ typedef struct no {
 } No;
 
 typedef struct pilha {
-    struct No *topo;
+    No *topo;
     int tamanho; 
 } Pilha;
 
@@ -38,22 +38,23 @@ Pilha *criaPilha () {
 
 void empilhar(Pilha *p, char valor) {
     No *novo = criaNo(valor);
-    if (p == NULL){
-        p->topo = novo;
-        p->tamanho++;
-    }
 
-    novo->prox = p;
-    p = novo;
+    novo->prox = p->topo;
+    p->topo = novo;
     p->tamanho++;
 }
 
+int verificaVazia (Pilha *p) {
+    return (p->topo == NULL);
+}
+
 char desempilhar (Pilha *p) {
-    if (p == NULL){
-        return NULL;
+    if (verificaVazia(p)){
+        printf("\nErro: Pilha vazia!\n");
+        return '\0';
     }
 
-    No *aux = p;
+    No *aux = p->topo;
     char dado = aux->dado;
     p->topo = aux->prox;
     p->tamanho--;
@@ -62,21 +63,14 @@ char desempilhar (Pilha *p) {
     return dado;
 }
 
-int verificaVazia (Pilha *p) {
-    if(p->topo == NULL){
-        return 1;
-    }
-
-    return 0;
-}
 
 void liberarPilha (Pilha *p){
-    No *aux = NULL;
-    while (p->topo != NULL){
-        aux = p->topo;
-        p->topo = aux->prox;
-        free(aux);
+
+    while (!verificaVazia(p)){
+        desempilhar(p);
     }
+
+    free(p);
 }
 
 int main () {
@@ -85,18 +79,24 @@ int main () {
     char dado;
 
 
-    printf("\nDigite uma mensagem (Saida era invertida)");
+    printf("\nDigite uma mensagem (Saida era invertida): ");
     // scanf(" %s", entrada);
     fgets(entrada, 1000, stdin);
 
-    for(int i=0; i != '\0'; i++){
-        empilhar(p, entrada[i]);
+    for(int i=0; entrada[i] != '\0'; i++){
+        if (entrada[i] != '\n') {
+            empilhar(p, entrada[i]);
+        }
     }
+
 
     for(int i = (p->tamanho); i > 0; i--) {
         dado = desempilhar(p);
         printf("%c", dado);
     }
 
+    printf("\n");
+
+    liberarPilha(p);
     return 0;
 }

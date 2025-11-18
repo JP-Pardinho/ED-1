@@ -29,9 +29,6 @@ void liberaMatriz(char **matriz, int linhas) {
 }
 
 void caminha(int l, int c) {
-    // Se achou solução, não precisa continuar
-    // if(achouSaida)
-    //     return;
 
     // Verifica se 'l' e 'c' são valores válidos
     if(l < 0 || c < 0 || l >= nl || c >= nc)
@@ -58,10 +55,6 @@ void caminha(int l, int c) {
     caminha(l - 1, c);
     caminha(l + 1, c);
 
-    // Se não achou saída, desmarca no mapa
-    // if(!achouSaida) {
-    //     mapa[l][c] = '.';
-    // }
 }
 
 int main() {
@@ -76,13 +69,6 @@ int main() {
     imprime(mapa, nl, nc);
 
     caminha(li - 1, ci - 1);
-
-    // if (achouSaida) {
-    //     printf("Saída encontrada:\n");
-    //     imprime(mapa, nl, nc);
-    // }
-    // else
-    //     printf("Solução não encontrada\n");
 
     printf("Quantidade de caminhos: %d\n", qtCaminhos);
 

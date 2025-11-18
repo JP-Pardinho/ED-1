@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct heap {
+    int capacidade;
+    int tamanhoAtual;
+    int *vetor;
+} heap;
+
 void trocar(int* a, int* b) {
     int temp = *a;
     *a = *b;

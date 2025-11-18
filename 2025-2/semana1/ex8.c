@@ -5,15 +5,21 @@
 #define ERRO(msg) fprintf(stderr, "ERRO: %s\n", #msg)
 
 void le_array(int *a, int n) { //poderia ser "int a[]" ao invés de "int *a"
-	AVISO("Vixe! Ainda não fiz a função 'le_array'");
+	for(int i = 0; i < n; i++){
+        scanf("%d", &a[i]);
+    }
 }
 
 void imprime_array(int *a, int n) {
-	AVISO("Vixe! Ainda não fiz a função 'imprime_array'");
+    for (int i = 0; i < n; i++) {
+        printf("%d\n", a[i]);
+    }
 }
 
-void troca(int x, int y) {
-	AVISO("Vixe! Ainda não fiz a função 'troca'");
+void troca(int *x, int *y) {
+	int aux = *x;
+    *x = *y;
+    *y = aux;
 }
 
 void funcao_misteriosa(int a[], int n) {
@@ -26,11 +32,11 @@ void funcao_misteriosa(int a[], int n) {
 			}
 		}
 		if (a[i] != a[posMin]) {
-			troca(a[i], a[posMin]);
+			troca(&a[i], &a[posMin]);
 		}
 	}
-
 }
+
 int main() {
 	int n;
 	printf("Digite o numero de valores a ser lido: ");
